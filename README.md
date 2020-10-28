@@ -26,9 +26,9 @@ integration and deployment for the [beale.ga](https://beale.ga) Nginx website.
 Access is gated behind an admin username and password.
 
 All configuration changes made through the Jenkins web app will be saved in the
-gitignored `./data/jenkins/` directory. For example, when you first run
-Jenkins, you should create an admin user and restrict access to logged-in users
-for future sessions.
+gitignored [`./data/jenkins/`](./data/jenkins/) directory. For example, when
+you first run Jenkins, you should create an admin user and restrict access to
+logged-in users for future sessions.
 
 ### AWS EC2 server
 
@@ -92,7 +92,8 @@ machine must have this enabled.
 
 4. Restart the server. This server will automatically restart whenever it is
    brought down (including when the machine turns) unless you explicitly stop
-   it via `sudo docker stop <container name>`
+   it via commands like `sudo docker-compose down` or `sudo docker stop
+   <container name>`
 
         sudo docker-compose down
         sudo docker-compose up
