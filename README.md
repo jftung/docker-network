@@ -24,6 +24,9 @@ management can be handled by logging into the admin Google account on
 
 ### Jenkins
 
+> **TODO** Integrate Jenkins with GitHub to automatically deploy new versions to
+> the AWS EC2 prod server.
+
 Another web app provided behind the Nginx revers proxy is a Jenkins server. The
 current primary purpopse of this Jenkins instance is to provide continuous
 integration and deployment for the [beale.ga](https://beale.ga) Nginx website.
@@ -36,17 +39,10 @@ logged-in users for future sessions.
 
 ### AWS EC2 server
 
-- AWS (US East, Ohio and North Virginia)
-    - EC2 virtual machine: Ubuntu 20.04.1 LTS
-    - Elastic IP address
-    - EC2 security group allowing inbound ports 22, 80, 443 (and 9090 for Jenkins)
-    - IAM roles: ec2-admin, deploy, and pipeline
-    - IAM github user with specific github-codedeploy policy
-    - CodeDeploy
-    - CodePipeline
-- GitHub
-- Jenkins
-- Docker containerized Nginx webserver
+- EC2 US East virtual machine: Ubuntu 20.04.1 LTS
+- EC2 security group allowing inbound ports 22, 80, and 443
+- IAM role: ec2-admin
+- Elastic IP address
 
 ## Dev testing [beale.ga](https://beale.ga)
 
