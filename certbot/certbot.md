@@ -27,6 +27,7 @@ proxy for an application.
    brought down (including when the machine turns) unless you explicitly stop
    it via `sudo docker stop <container name>`
 
+        sudo docker-compose down
         sudo docker-compose up
 
 ## License
