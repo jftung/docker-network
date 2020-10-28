@@ -76,9 +76,6 @@ docker-compose run --rm --entrypoint "\
     --force-renewal" certbot
 echo
 
-echo "### Reloading nginx ..."
-docker-compose exec nginx nginx -s reload
-
 # MIT License
 #
 # Copyright (c) 2018 Philipp Schmieder
