@@ -27,10 +27,10 @@ services:
         restart: unless-stopped
         volumes:
             - ./nginx/beale.conf:/etc/nginx/nginx.conf
-            - ./data/beale/html/index.html:/etc/nginx/html/index.html
+            - ./beale/html/index.html:/etc/nginx/html/index.html
     jenkins-host:
         container_name: jenkins-host
         image: jenkins-host
         restart: unless-stopped
         volumes:
-            - ./data/jenkins_home:/var/jenkins_home
+            - ./data/jenkins:/var/jenkins_home
