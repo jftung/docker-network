@@ -4,7 +4,7 @@
 
 [`init-letsencrypt.sh`](./init-letsencrypt.sh) fetches and ensures the renewal
 of a Let’s Encrypt certificate for one or multiple domains in a docker-compose
-setup with nginx.  This is useful when you need to set up nginx as a reverse
+setup with nginx. This is useful when you need to set up nginx as a reverse
 proxy for an application.
 
 ## Installation

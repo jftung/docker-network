@@ -9,14 +9,18 @@ auto-renewing TLS certificates provided by Certbot.
 
 TLS certificate configuration via Certbot should only be done on the actual AWS
 EC2 virtual machine to support HTTPS. All local development and testing should
-be done via simple HTTP. See [here](./certbot/certbot.md) for further
-information.
+be done via simple HTTP. Certificates and keys are saved in the gitignored
+[`./data/certbot/`](./data/certbot/) directory. See [here](./certbot/certbot.md)
+for further information.
 
 ### Nginx website [beale.ga](https://beale.ga)
 
 The primary web app privded behind the Nginx reverse proxy is the
-[beale.ga](https://beale.ga) website. DNS management can be handled by logging
-into the admin Google account on [freenom.com](https://freenom.com).
+[beale.ga](https://beale.ga) website. The entire
+[`./beale/html/`](./beale/html/) directory is passed to a Docker volume, so
+any new files can be placed there with no further configuration necessary. DNS
+management can be handled by logging into the admin Google account on
+[freenom.com](https://freenom.com).
 
 ### Jenkins
 
