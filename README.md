@@ -15,7 +15,7 @@ for further information.
 
 ### Nginx website [beale.ga](https://beale.ga)
 
-The primary web app privded behind the Nginx reverse proxy is the
+The primary web app provided behind the Nginx reverse proxy is the
 [beale.ga](https://beale.ga) website. The entire
 [`./beale/html/`](./beale/html/) directory is passed to a Docker volume, so
 any new files can be placed there with no further configuration necessary. DNS
@@ -27,8 +27,8 @@ management can be handled by logging into the admin Google account on
 > **TODO** Integrate Jenkins with GitHub to automatically deploy new versions to
 > the AWS EC2 prod server.
 
-Another web app provided behind the Nginx revers proxy is a Jenkins server. The
-current primary purpopse of this Jenkins instance is to provide continuous
+Another web app provided behind the Nginx reverse proxy is a Jenkins server. The
+current primary purpose of this Jenkins instance is to provide continuous
 integration and deployment for the [beale.ga](https://beale.ga) Nginx website.
 Access is gated behind an admin username and password.
 
@@ -46,18 +46,23 @@ logged-in users for future sessions.
 
 ## Dev testing [beale.ga](https://beale.ga)
 
-1. [Install docker-compose](https://docs.docker.com/compose/install/#install-compose)
+1. Install both [Docker](https://docs.docker.com/get-docker/) and
+   [Docker Compose](https://docs.docker.com/compose/install/). Follow the
+   relevant procedures for your machine and operating system.
 
-2. Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
+2. Ensure Docker is up and running. Consider having Docker autostart on your
+   dev machine's turn, e.g. for Linux `sudo systemctl enable docker`.
 
-3. Change to the `beale` directory and bring up the server:
+3. Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
+
+4. Change to the `beale` directory and bring up the server:
 
         cd beale
         sudo docker-compose up
 
-4. Connect to `http://localhost:8080` and test your changes
+5. Connect to `http://localhost:8080` and test your changes
 
-5. Bring down the server:
+6. Bring down the server:
 
         sudo docker-compose down
 
@@ -68,13 +73,12 @@ and [jenkins.beale.ga](https://jenkins.beale.ga) websites.
 
 ### Docker installation
 
-Install both [Docker](https://docs.docker.com) and
-[Docker Compose](https://docs.docker.com/compose). Follow the relevant
+Install both [Docker](https://docs.docker.com/get-docker/) and
+[Docker Compose](https://docs.docker.com/compose/install/). Follow the relevant
 procedures for your machine and operating system.
 
-Ensure Docker is up and running. Consider having Docker autostart on your dev
-machine's turn, e.g. for Linux `sudo systemctl enable docker`. The AWS EC2 prod
-machine must have this enabled.
+Ensure Docker is up and running. Enable autostart on the AWS EC2 prod machine
+turn, i.e. `sudo systemctl enable docker`.
 
 ### Repository setup
 
