@@ -1,10 +1,10 @@
-# Boilerplate for nginx with Let’s Encrypt on docker-compose
+# Boilerplate for Nginx with Let’s Encrypt on Docker Compose
 
-> This is a fork of [this original repository](https://github.com/wmnnd/nginx-certbot), which is accompanied by a [step-by-step guide on how to set up nginx and Let’s Encrypt with Docker](https://medium.com/@pentacent/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71).
+> This is a fork of [this original repository](https://github.com/wmnnd/nginx-certbot), which is accompanied by a [step-by-step guide on how to set up Nginx and Let’s Encrypt with Docker](https://medium.com/@pentacent/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71).
 
 [`init-letsencrypt.sh`](./init-letsencrypt.sh) fetches and ensures the renewal
 of a Let’s Encrypt certificate for one or multiple domains in a docker-compose
-setup with nginx. This is useful when you need to set up nginx as a reverse
+setup with Nginx. This is useful when you need to set up Nginx as a reverse
 proxy for an application.
 
 ## Installation
