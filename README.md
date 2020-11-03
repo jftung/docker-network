@@ -10,14 +10,14 @@ auto-renewing TLS certificates provided by Certbot.
 TLS certificate configuration via Certbot should only be done on the actual AWS
 EC2 virtual machine to support HTTPS. All local development and testing should
 be done via simple HTTP. Certificates and keys are saved in the gitignored
-[`./data/certbot/`](./data/certbot/) directory. See [here](./certbot/certbot.md)
+[`data/certbot/`](data/certbot/) directory. See [here](certbot/certbot.md)
 for further information.
 
 ### Nginx website [beale.ga](https://beale.ga)
 
 The primary web app provided behind the Nginx reverse proxy is the
 [beale.ga](https://beale.ga) website. The entire
-[`./beale/html/`](./beale/html/) directory is passed to a Docker volume, so
+[`beale/html/`](beale/html/) directory is passed to a Docker volume, so
 any new files can be placed there with no further configuration necessary. DNS
 management can be handled by logging into the admin Google account on
 [freenom.com](https://freenom.com).
@@ -34,7 +34,7 @@ this Jenkins instance is to provide continuous integration and deployment for
 the [beale.ga](https://beale.ga) Nginx website.
 
 All configuration changes made through the Jenkins web app will be saved in the
-gitignored [`./data/jenkins/`](./data/jenkins/) directory. For example, when
+gitignored [`data/jenkins/`](data/jenkins/) directory. For example, when
 you first run Jenkins, you should create an admin user and restrict access to
 logged-in users for future sessions.
 
@@ -59,7 +59,7 @@ logged-in users for future sessions.
 4. Change to the `beale` directory and bring up the server:
 
         cd beale
-        sudo docker-compose up
+        sudo docker-compose up &
 
 5. Connect to `http://localhost:8080` and test your changes
 
@@ -67,7 +67,20 @@ logged-in users for future sessions.
 
         sudo docker-compose down
 
-## Prod installation
+## Prod continuous deployment
+
+Jenkins will automatically build, deploy, and bounce everything when a pull
+request is accepted. No admin actions are necessary, with one exception.
+
+If [`jenkins/Dockerfile`](jenkins/Dockerfile) was modifed, rebuild the custom
+`jenkins-host` Docker image and restart the network:
+
+        cd jenkins
+        docker build -t jenkins-host .
+        cd ..
+        sudo docker-compose restart &
+
+## Prod first time setup
 
 This section is only relevant for admins of the [beale.ga](https://beale.ga)
 and [jenkins.beale.ga](https://jenkins.beale.ga) websites.
@@ -100,5 +113,4 @@ turn, i.e. `sudo systemctl enable docker`.
    it via commands like `sudo docker-compose down` or `sudo docker stop
    <container name>`
 
-        sudo docker-compose down
-        sudo docker-compose up
+        sudo docker-compose restart &

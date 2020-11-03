@@ -34,3 +34,6 @@ services:
         restart: unless-stopped
         volumes:
             - ./data/jenkins:/var/jenkins_home
+            - ./nginx/reverse-proxy.conf:/etc/nginx/nginx.conf
+            - ./nginx/beale.conf:/etc/nginx/nginx.conf
+            - ./beale/html:/etc/nginx/html

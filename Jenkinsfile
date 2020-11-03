@@ -5,14 +5,12 @@ pipeline {
             steps {
                 echo "Building"
                 sh "ls -la"
+                touch /etc/nginx/html/test.txt
             }
         }
         stage("Deploy") {
             when {
-                allOf {
-                    environment name: "CHANGE_ID", value: ""
-                    branch "main"
-                }
+                branch "main"
             }
             steps {
                 echo "Deploying"
@@ -22,10 +20,7 @@ pipeline {
         }
         stage("Bounce") {
             when {
-                allOf {
-                    environment name: "CHANGE_ID", value: ""
-                    branch "main"
-                }
+                environment name: "CHANGE_ID", value: ""
             }
             steps {
                 echo "Bouncing"
