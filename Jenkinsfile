@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo "Building"
                 sh "ls -la"
-                touch /etc/nginx/html/test.txt
+                writeFile file: "/etc/nginx/html/test.txt", text: "Some Text"
             }
         }
         stage("Deploy") {
