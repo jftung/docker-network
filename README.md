@@ -75,7 +75,7 @@ Install Prettier and ESLint (only necessary the first time):
 
 Run linters:
 
-        ./node_modules/.bin/prettier -w *
+        ./node_modules/.bin/prettier -w * .github/ .eslintrc.json
         ./node_modules/.bin/eslint --fix beale/html/
 
 You can safely ignore any Prettier errors about "No supported files were found
