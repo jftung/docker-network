@@ -67,6 +67,10 @@ logged-in users for future sessions.
 
         sudo docker-compose down
 
+## Dev linting
+
+Install eslint and prettier
+
 ## Prod continuous deployment
 
 Jenkins will automatically build, deploy, and bounce everything when a pull
