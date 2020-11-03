@@ -9,26 +9,27 @@ proxy for an application.
 
 ## Installation
 
-1. [Install docker-compose](https://docs.docker.com/compose/install/#install-compose)
+1.  [Install docker-compose](https://docs.docker.com/compose/install/#install-compose)
 
-2. Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
+2.  Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
 
-3. Modify configuration:
+3.  Modify configuration:
+
     - Add domains and email addresses to [`init-letsencrypt.sh`](./init-letsencrypt.sh)
     - Replace all occurrences of `example.org` with your primary domain (the
       first one you added to [`init-letsencrypt.sh`](./init-letsencrypt.sh)) in
       all [`nginx/*.conf`](../nginx/) files
 
-4. Run the init script:
+4.  Run the init script:
 
         sudo ./certbot/init-letsencrypt.sh
 
-5. Run the server. This server will automatically restart whenever it is
-   brought down (including when the machine turns) unless you explicitly stop
-   it via `sudo docker stop <container name>`
+5.  Run the server. This server will automatically restart whenever it is
+    brought down (including when the machine turns) unless you explicitly stop
+    it via `sudo docker stop <container name>`
 
-        sudo docker-compose down
-        sudo docker-compose up
+         sudo docker-compose down
+         sudo docker-compose up
 
 ## License
 

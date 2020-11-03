@@ -47,36 +47,39 @@ logged-in users for future sessions.
 
 ## Dev testing [beale.ga](https://beale.ga)
 
-1. Install both [Docker](https://docs.docker.com/get-docker/) and
-   [Docker Compose](https://docs.docker.com/compose/install/). Follow the
-   relevant procedures for your machine and operating system.
+1.  Install both [Docker](https://docs.docker.com/get-docker/) and
+    [Docker Compose](https://docs.docker.com/compose/install/). Follow the
+    relevant procedures for your machine and operating system.
 
-2. Ensure Docker is up and running. Consider having Docker autostart on your
-   dev machine's turn, e.g. for Linux `sudo systemctl enable docker`.
+2.  Ensure Docker is up and running. Consider having Docker autostart on your
+    dev machine's turn, e.g. for Linux `sudo systemctl enable docker`.
 
-3. Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
+3.  Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
 
-4. Change to the `beale` directory and bring up the server:
+4.  Change to the `beale` directory and bring up the server:
 
         cd beale
         sudo docker-compose up &
 
-5. Connect to `http://localhost:8080` and test your changes
+5.  Connect to `http://localhost:8080` and test your changes
 
-6. Bring down the server:
+6.  Bring down the server:
 
         sudo docker-compose down
 
 ## Dev linting
 
-Install ESLint and Prettier (only necessary the first time):
+Install Prettier and ESLint (only necessary the first time):
 
         npm install
 
 Run linters:
 
-        ./node_modules/.bin/eslint
-        ./node_modules/.bin/prettier
+        ./node_modules/.bin/prettier -w *
+        ./node_modules/.bin/eslint --fix beale/html/
+
+You can safely ignore any Prettier errors about "No supported files were found
+in the directory."
 
 As an appendix, the npm [`package.json`](package.json),
 [`package-lock.json`](package-lock.json), and
@@ -116,21 +119,20 @@ turn, i.e. `sudo systemctl enable docker`.
 
 ### Repository setup
 
-1. Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
+1.  Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
 
-2. Build the custom `jenkins-host` Docker image:
+2.  Build the custom `jenkins-host` Docker image:
 
         cd jenkins
         docker build -t jenkins-host .
         cd ..
 
-3. Run the Let's Encrypt / Certbot init script:
+3.  Run the Let's Encrypt / Certbot init script:
 
         sudo ./certbot/init-letsencrypt.sh
 
-4. Restart the server. This server will automatically restart whenever it is
-   brought down (including when the machine turns) unless you explicitly stop
-   it via commands like `sudo docker-compose down` or `sudo docker stop
-   <container name>`
+4.  Restart the server. This server will automatically restart whenever it is
+    brought down (including when the machine turns) unless you explicitly stop
+    it via commands like `sudo docker-compose down` or `sudo docker stop <container name>`
 
-        sudo docker-compose restart &
+         sudo docker-compose restart &
