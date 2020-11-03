@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v2
-      - name: Push to GitHub Packages
-        uses: docker/build-push-action@v2
+        uses: actions/checkout@v2.3.4
+      - name: Build and push Docker images to GitHub Packages
+        uses: docker/build-push-action@v2.1.0
         with:
           tags: nginx-reverse-proxy
           file: ./nginx/Dockerfile
@@ -25,9 +25,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v2
-      - name: Push to GitHub Packages
-        uses: docker/build-push-action@v2
+        uses: actions/checkout@v2.3.4
+      - name: Build and push Docker images to GitHub Packages
+        uses: docker/build-push-action@v2.1.0
         with:
           tags: certbot-beale
           file: ./certbot/Dockerfile
@@ -40,9 +40,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v2
-      - name: Push to GitHub Packages
-        uses: docker/build-push-action@v2
+        uses: actions/checkout@v2.3.4
+      - name: Build and push Docker images to GitHub Packages
+        uses: docker/build-push-action@v2.1.0
         with:
           tags: nginx-beale
           file: ./Dockerfile
@@ -55,9 +55,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v2
-      - name: Push to GitHub Packages
-        uses: docker/build-push-action@v2
+        uses: actions/checkout@v2.3.4
+      - name: Build and push Docker images to GitHub Packages
+        uses: docker/build-push-action@v2.1.0
         with:
           tags: jenkins-host
           file: ./jenkins/Dockerfile
