@@ -27,10 +27,11 @@ management can be handled by logging into the admin Google account on
 > **TODO** Integrate Jenkins with GitHub to automatically deploy new versions to
 > the AWS EC2 prod server.
 
-Another web app provided behind the Nginx reverse proxy is a Jenkins server. The
-current primary purpose of this Jenkins instance is to provide continuous
-integration and deployment for the [beale.ga](https://beale.ga) Nginx website.
-Access is gated behind an admin username and password.
+Another web app provided behind the Nginx reverse proxy is a Jenkins server
+gated behind an admin username and password:
+[jenkins.beale.ga](https://jenkins.beale.ga). The current primary purpose of
+this Jenkins instance is to provide continuous integration and deployment for
+the [beale.ga](https://beale.ga) Nginx website.
 
 All configuration changes made through the Jenkins web app will be saved in the
 gitignored [`./data/jenkins/`](./data/jenkins/) directory. For example, when
