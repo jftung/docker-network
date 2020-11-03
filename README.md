@@ -69,7 +69,23 @@ logged-in users for future sessions.
 
 ## Dev linting
 
-Install eslint and prettier
+Install ESLint and Prettier (only necessary the first time):
+
+        npm install
+
+Run linters:
+
+        ./node_modules/.bin/eslint
+        ./node_modules/.bin/prettier
+
+As an appendix, the npm [`package.json`](package.json),
+[`package-lock.json`](package-lock.json), and
+[`.eslintrc.json`](.eslintrc.json) files were originally generated via:
+
+        npm init
+        npm install eslint --save-dev
+        npm install prettier --save-dev
+        ./node_modules/.bin/eslint --init
 
 ## Prod continuous deployment
 
