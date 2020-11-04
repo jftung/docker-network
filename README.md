@@ -22,7 +22,7 @@ any new files can be placed there with no further configuration necessary. DNS
 management can be handled by logging into the admin Google account on
 [freenom.com](https://freenom.com).
 
-## GitHub Actions
+### GitHub Actions
 
 Linting is done automatically whenever a pull request is opened or updated.
 When a pull request to `main` is accepted, the Docker images are built and
@@ -47,14 +47,16 @@ logged-in users for future sessions.
 - IAM role: ec2-admin
 - Elastic IP address
 
-## Dev testing [beale.ga](https://beale.ga)
+## Developer's guide
+
+### Building [beale.ga](https://beale.ga)
 
 1.  Install both [Docker](https://docs.docker.com/get-docker/) and
     [Docker Compose](https://docs.docker.com/compose/install/). Follow the
     relevant procedures for your machine and operating system.
 
 2.  Ensure Docker is up and running. Consider having Docker autostart on your
-    dev machine's turn, e.g. for Linux `sudo systemctl enable docker`.
+    local machine's turn, e.g. for Linux `sudo systemctl enable docker`.
 
 3.  Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
 
@@ -69,7 +71,7 @@ logged-in users for future sessions.
 
         sudo docker-compose down
 
-## Dev linting
+### Linting
 
 Install Prettier and ESLint (only necessary the first time):
 
@@ -77,7 +79,7 @@ Install Prettier and ESLint (only necessary the first time):
 
 Run linters:
 
-        ./run-linters.sh
+        ./lint.sh
 
 You can safely ignore any Prettier errors about "No supported files were found
 in the directory." These linters are automatically run whenever a pull request
@@ -92,7 +94,7 @@ As a historical appendix, the npm [`package.json`](package.json),
         npm install prettier --save-dev
         ./node_modules/.bin/eslint --init
 
-## Prod deployment
+## Deployment
 
 This section is only relevant for admins of the [beale.ga](https://beale.ga)
 and [jenkins.beale.ga](https://jenkins.beale.ga) websites.
@@ -105,8 +107,8 @@ Install both [Docker](https://docs.docker.com/get-docker/) and
 [Docker Compose](https://docs.docker.com/compose/install/). Follow the relevant
 procedures for your machine and operating system.
 
-Ensure Docker is up and running. Enable autostart on the AWS EC2 prod machine
-turn, i.e. `sudo systemctl enable docker`.
+Ensure Docker is up and running. Enable autostart on the AWS EC2 machine turn,
+i.e. `sudo systemctl enable docker`.
 
 #### Repository setup
 
@@ -115,7 +117,7 @@ turn, i.e. `sudo systemctl enable docker`.
 2.  Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
 
 3.  Export the container personal access token environment variable on the AWS
-    EC2 prod machine:
+    EC2 machine:
 
         export CR_PAT="admin_personal_access_token"
 
@@ -140,12 +142,12 @@ turn, i.e. `sudo systemctl enable docker`.
 ### Subsequent deployments
 
 When a pull request to `main` is accepted, the Docker images are automatically
-built and pushed to and `ghcr.io`. From there, a script on the AWS EC2 prod
-machine controls the actual deployment and bouncing of the docker containers.
+built and pushed to and `ghcr.io`. From there, a script on the AWS EC2 machine
+controls the actual deployment and bouncing of the docker containers.
 
 Always run:
 
-        ./prod-deploy.sh
+        ./deploy.sh
 
 Only run if updates were made to any of the following files:
 
