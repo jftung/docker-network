@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  deploy-reverse-proxy:
+  deploy:
     name: Build and push Docker images to GitHub Packages
     runs-on: ubuntu-latest
     steps:
