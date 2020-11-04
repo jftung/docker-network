@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JFTung/docker-network.git"
+    "url": "git+https://github.com/jftung/docker-network.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JFTung/docker-network/issues"
+    "url": "https://github.com/jftung/docker-network/issues"
   },
-  "homepage": "https://github.com/JFTung/docker-network#readme",
+  "homepage": "https://github.com/jftung/docker-network#readme",
   "devDependencies": {
     "eslint": "^7.12.1",
     "prettier": "^2.1.2"
