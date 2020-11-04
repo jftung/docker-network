@@ -1,4 +1,4 @@
 "use strict";
 
 console.log("Hello, Stephen!");
-console.log(2+2);
+console.log(2 + 2);
