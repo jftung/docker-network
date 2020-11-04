@@ -22,6 +22,12 @@ any new files can be placed there with no further configuration necessary. DNS
 management can be handled by logging into the admin Google account on
 [freenom.com](https://freenom.com).
 
+## GitHub Actions
+
+Linting is done automatically whenever a pull request is opened or updated.
+When a pull request to `main` is accepted, the Docker images are built and
+pushed to and `ghcr.io`.
+
 ### Jenkins
 
 Another web app provided behind the Nginx reverse proxy is a Jenkins server
@@ -74,7 +80,8 @@ Run linters:
         ./run-linters.sh
 
 You can safely ignore any Prettier errors about "No supported files were found
-in the directory."
+in the directory." These linters are automatically run whenever a pull request
+is opened or updated.
 
 As a historical appendix, the npm [`package.json`](package.json),
 [`package-lock.json`](package-lock.json), and
@@ -84,12 +91,6 @@ As a historical appendix, the npm [`package.json`](package.json),
         npm install eslint --save-dev
         npm install prettier --save-dev
         ./node_modules/.bin/eslint --init
-
-## GitHub Actions
-
-Linting is done automatically whenever a pull request is opened or updated.
-When a pull request to `main` is accepted, the Docker images are built and
-pushed to `docker.pkg.github.com` and `ghcr.io`.
 
 ## Prod deployment
 
@@ -137,6 +138,10 @@ turn, i.e. `sudo systemctl enable docker`.
         sudo docker-compose restart &
 
 ### Subsequent deployments
+
+When a pull request to `main` is accepted, the Docker images are automatically
+built and pushed to and `ghcr.io`. From there, a script on the AWS EC2 prod
+machine controls the actual deployment and bouncing of the docker containers.
 
 Always run:
 
