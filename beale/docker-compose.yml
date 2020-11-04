@@ -6,7 +6,7 @@ services:
     image: nginx
     volumes:
       - ./dev.conf:/etc/nginx/nginx.conf
-      - ./html:/etc/nginx/html
+      - ./html/:/etc/nginx/html/
     ports:
       - "8080:8080"
     command: '/bin/sh -c ''nginx -g "daemon off;"'''
