@@ -33,7 +33,7 @@ jobs:
         uses: docker/build-push-action@v2.1.0
         with:
           tags: nginx-beale
-          file: ./beale/Dockerfile
+          file: ./nginx/beale/Dockerfile
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
