@@ -110,24 +110,27 @@ turn, i.e. `sudo systemctl enable docker`.
 
 #### Repository setup
 
-1.  Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
+1.  [Create an encrypted secret `CR_PAT` for this repository](https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository)
 
-2.  Export the container personal access token environment variable:
+2.  Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
+
+3.  Export the container personal access token environment variable on the AWS
+    EC2 prod machine:
 
         export CR_PAT="your_personal_access_token"
 
-3.  Export the container personal access token environment variable:
+4.  Export the container personal access token environment variable:
 
         sudo docker pull ghcr.io.jftung/docker-network/nginx-reverse-proxy
         sudo docker pull ghcr.io.jftung/docker-network/certbot-beale
         sudo docker pull ghcr.io.jftung/docker-network/nginx-beale
         sudo docker pull ghcr.io.jftung/docker-network/jenkins-host
 
-4.  Run the Let's Encrypt / Certbot init script:
+5.  Run the Let's Encrypt / Certbot init script:
 
         sudo ./certbot/init-letsencrypt.sh
 
-5.  Restart the server. This server will automatically restart whenever it is
+6.  Restart the server. This server will automatically restart whenever it is
     brought down (including when the machine turns) unless you explicitly stop
     it via commands like `sudo docker-compose down` or `sudo docker stop <container name>`
 
