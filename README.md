@@ -71,8 +71,7 @@ Install Prettier and ESLint (only necessary the first time):
 
 Run linters:
 
-        ./node_modules/.bin/prettier -w * .github/ .eslintrc.json
-        ./node_modules/.bin/eslint --fix beale/html/
+        ./run-linters.sh
 
 You can safely ignore any Prettier errors about "No supported files were found
 in the directory."
@@ -117,14 +116,15 @@ turn, i.e. `sudo systemctl enable docker`.
 3.  Export the container personal access token environment variable on the AWS
     EC2 prod machine:
 
-        export CR_PAT="your_personal_access_token"
+        export CR_PAT="admin_personal_access_token"
 
 4.  Export the container personal access token environment variable:
 
-        sudo docker pull ghcr.io.jftung/docker-network/nginx-reverse-proxy
-        sudo docker pull ghcr.io.jftung/docker-network/certbot-beale
-        sudo docker pull ghcr.io.jftung/docker-network/nginx-beale
-        sudo docker pull ghcr.io.jftung/docker-network/jenkins-host
+        echo $CR_PAT | sudo docker login ghcr.io -u jftung --password-stdin
+        sudo docker pull ghcr.io/jftung/nginx-reverse-proxy
+        sudo docker pull ghcr.io/jftung/certbot-beale
+        sudo docker pull ghcr.io/jftung/nginx-beale
+        sudo docker pull ghcr.io/jftung/jenkins-host
 
 5.  Run the Let's Encrypt / Certbot init script:
 
@@ -134,12 +134,23 @@ turn, i.e. `sudo systemctl enable docker`.
     brought down (including when the machine turns) unless you explicitly stop
     it via commands like `sudo docker-compose down` or `sudo docker stop <container name>`
 
-         sudo docker-compose restart &
+        sudo docker-compose restart &
 
 ### Subsequent deployments
 
-        sudo docker pull ghcr.io.jftung/docker-network/nginx-reverse-proxy
-        sudo docker pull ghcr.io.jftung/docker-network/certbot-beale
-        sudo docker pull ghcr.io.jftung/docker-network/nginx-beale
-        sudo docker pull ghcr.io.jftung/docker-network/jenkins-host
+Always run:
+
+        ./prod-deploy.sh
+
+Only run if updates were made to any of the following files:
+
+- [`docker-compose.yml`](docker-compose.yml)
+- [`nginx/beale/Dockerfile`](nginx/beale/Dockerfile)
+- [`nginx/beale/nginx.conf`](nginx/beale/nginx.conf)
+- [`nginx/reverse-proxy/Dockerfile`](nginx/reverse-proxy/Dockerfile)
+- [`nginx/reverse-proxy/nginx.conf`](nginx/reverse-proxy/nginx.conf)
+- [`certbot/Dockerfile`](certbot/Dockerfile)
+- [`jenkins/Dockerfile`](jenkins/Dockerfile)
+- [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+
         sudo docker-compose restart &

@@ -1,10 +1,11 @@
+// NOTE: CURRENTLY UNUSED
+
 pipeline {
     agent any
     stages {
         stage("Build") {
             steps {
                 echo "Building"
-                sh "ls -la"
                 writeFile file: "/etc/nginx/html/test.txt", text: "Some Text"
             }
         }
@@ -14,7 +15,6 @@ pipeline {
             }
             steps {
                 echo "Deploying"
-                sh "ls"
                 //sudo docker-compose restart
             }
         }
@@ -24,7 +24,6 @@ pipeline {
             }
             steps {
                 echo "Bouncing"
-                sh "ls"
                 //sudo docker-compose restart
             }
         }
