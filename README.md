@@ -24,14 +24,10 @@ management can be handled by logging into the admin Google account on
 
 ### Jenkins
 
-> **TODO** Integrate Jenkins with GitHub to automatically deploy new versions to
-> the AWS EC2 prod server.
-
 Another web app provided behind the Nginx reverse proxy is a Jenkins server
 gated behind an admin username and password:
-[jenkins.beale.ga](https://jenkins.beale.ga). The current primary purpose of
-this Jenkins instance is to provide continuous integration and deployment for
-the [beale.ga](https://beale.ga) Nginx website.
+[jenkins.beale.ga](https://jenkins.beale.ga). This Jenkins instance is not
+currently being actively used, but it is up and available.
 
 All configuration changes made through the Jenkins web app will be saved in the
 gitignored [`data/jenkins/`](data/jenkins/) directory. For example, when
@@ -81,7 +77,7 @@ Run linters:
 You can safely ignore any Prettier errors about "No supported files were found
 in the directory."
 
-As an appendix, the npm [`package.json`](package.json),
+As a historical appendix, the npm [`package.json`](package.json),
 [`package-lock.json`](package-lock.json), and
 [`.eslintrc.json`](.eslintrc.json) files were originally generated via:
 
@@ -90,25 +86,20 @@ As an appendix, the npm [`package.json`](package.json),
         npm install prettier --save-dev
         ./node_modules/.bin/eslint --init
 
-## Prod continuous deployment
+## GitHub Actions
 
-Jenkins will automatically build, deploy, and bounce everything when a pull
-request is accepted. No admin actions are necessary, with one exception.
+Linting is done automatically whenever a pull request is opened or updated.
+When a pull request to `main` is accepted, the Docker images are built and
+pushed to `docker.pkg.github.com` and `ghcr.io`.
 
-If [`jenkins/Dockerfile`](jenkins/Dockerfile) was modifed, rebuild the custom
-`jenkins-host` Docker image and restart the network:
-
-        cd jenkins
-        docker build -t jenkins-host .
-        cd ..
-        sudo docker-compose restart &
-
-## Prod first time setup
+## Prod deployment
 
 This section is only relevant for admins of the [beale.ga](https://beale.ga)
 and [jenkins.beale.ga](https://jenkins.beale.ga) websites.
 
-### Docker installation
+### First time setup
+
+#### Docker installation
 
 Install both [Docker](https://docs.docker.com/get-docker/) and
 [Docker Compose](https://docs.docker.com/compose/install/). Follow the relevant
@@ -117,22 +108,35 @@ procedures for your machine and operating system.
 Ensure Docker is up and running. Enable autostart on the AWS EC2 prod machine
 turn, i.e. `sudo systemctl enable docker`.
 
-### Repository setup
+#### Repository setup
 
 1.  Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
 
-2.  Build the custom `jenkins-host` Docker image:
+2.  Export the container personal access token environment variable:
 
-        cd jenkins
-        docker build -t jenkins-host .
-        cd ..
+        export CR_PAT="your_personal_access_token"
 
-3.  Run the Let's Encrypt / Certbot init script:
+3.  Export the container personal access token environment variable:
+
+        sudo docker pull ghcr.io.jftung/docker-network/nginx-reverse-proxy
+        sudo docker pull ghcr.io.jftung/docker-network/certbot-beale
+        sudo docker pull ghcr.io.jftung/docker-network/nginx-beale
+        sudo docker pull ghcr.io.jftung/docker-network/jenkins-host
+
+4.  Run the Let's Encrypt / Certbot init script:
 
         sudo ./certbot/init-letsencrypt.sh
 
-4.  Restart the server. This server will automatically restart whenever it is
+5.  Restart the server. This server will automatically restart whenever it is
     brought down (including when the machine turns) unless you explicitly stop
     it via commands like `sudo docker-compose down` or `sudo docker stop <container name>`
 
          sudo docker-compose restart &
+
+### Subsequent deployments
+
+        sudo docker pull ghcr.io.jftung/docker-network/nginx-reverse-proxy
+        sudo docker pull ghcr.io.jftung/docker-network/certbot-beale
+        sudo docker pull ghcr.io.jftung/docker-network/nginx-beale
+        sudo docker pull ghcr.io.jftung/docker-network/jenkins-host
+        sudo docker-compose restart &

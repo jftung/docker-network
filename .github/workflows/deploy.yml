@@ -6,27 +6,21 @@ on:
 
 jobs:
   deploy-reverse-proxy:
-    name: Push custom Nginx reverse proxy Docker image to GitHub Packages
+    name: Build and push Docker images to GitHub Packages
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
         uses: actions/checkout@v2.3.4
-      - name: Build and push Docker images to GitHub Packages
+      - name: Build and push Nginx reverse proxy Docker image to GitHub Packages
         uses: docker/build-push-action@v2.1.0
         with:
           tags: nginx-reverse-proxy
-          file: ./nginx/Dockerfile
+          file: ./nginx/reverse-proxy/Dockerfile
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: jftung/docker-network/jenkins-host
-  deploy-certbot:
-    name: Push custom Certbot Docker image to GitHub Packages
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v2.3.4
-      - name: Build and push Docker images to GitHub Packages
+          repository: jftung/docker-network/nginx-reverse-proxy
+      - name: Build and push custom Certbot Docker image to GitHub Packages
         uses: docker/build-push-action@v2.1.0
         with:
           tags: certbot-beale
@@ -34,29 +28,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: jftung/docker-network/jenkins-host
-  deploy-beale:
-    name: Push custom Nginx Beale website Docker image to GitHub Packages
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v2.3.4
-      - name: Build and push Docker images to GitHub Packages
+          repository: jftung/docker-network/certbot-beale
+      - name: Build and push Nginx Beale website Docker image to GitHub Packages
         uses: docker/build-push-action@v2.1.0
         with:
           tags: nginx-beale
-          file: ./Dockerfile
+          file: ./beale/Dockerfile
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: jftung/docker-network/jenkins-host
-  deploy-jenkins-host:
-    name: Push custom Jenkins Docker image to GitHub Packages
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v2.3.4
-      - name: Build and push Docker images to GitHub Packages
+          repository: jftung/docker-network/nginx-beale
+      - name: Build and push custom Jenkins Docker image to GitHub Packages
         uses: docker/build-push-action@v2.1.0
         with:
           tags: jenkins-host
