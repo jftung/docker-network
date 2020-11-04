@@ -11,7 +11,7 @@ proxy for an application.
 
 1.  [Install docker-compose](https://docs.docker.com/compose/install/#install-compose)
 
-2.  Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
+2.  Clone this repository: `git clone https://github.com/jftung/docker-network.git`
 
 3.  Modify configuration:
 

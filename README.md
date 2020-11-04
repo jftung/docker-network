@@ -58,7 +58,7 @@ logged-in users for future sessions.
 2.  Ensure Docker is up and running. Consider having Docker autostart on your
     local machine's turn, e.g. for Linux `sudo systemctl enable docker`.
 
-3.  Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
+3.  Clone this repository: `git clone https://github.com/jftung/docker-network.git`
 
 4.  Change to the `beale` directory and bring up the server:
 
@@ -114,7 +114,7 @@ i.e. `sudo systemctl enable docker`.
 
 1.  [Create an encrypted secret `CR_PAT` for this repository](https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository)
 
-2.  Clone this repository: `git clone https://github.com/JFTung/docker-network.git`
+2.  Clone this repository: `git clone https://github.com/jftung/docker-network.git`
 
 3.  Export the container personal access token environment variable on the AWS
     EC2 machine:
